@@ -20,6 +20,11 @@ div#chess_container div:nth-child(2n) { /*1 for the grid coloratoin */
     border-radius: 3px;
 }
 /* . */
+/* on modifications for the past grid: */
+.sidebar {
+    background-color: grey;
+    border-radius: 0 0 0 0;
+}
 .hid0 {
     grid-area: hid0;
     background: grey;
@@ -28,7 +33,7 @@ div#chess_container div:nth-child(2n) { /*1 for the grid coloratoin */
 .chess_container {
     grid-area: chess_container;
 }
-.hid2 {
+.hid2 { /*this should be renamed*/
     grid-area: hid2;
     background: slategrey;
     display: block;

@@ -228,13 +228,24 @@ function init() {
         var counter = 1; // may bring unexpected modifications, but I'll do them
         // (*)also, if counter is odd/even, can add to a prev or next message
         // (*)yeah, should only keep the info from the present game and log the rest
-        return function (msg) {
-            var new_div = document.createElement("div");
-            new_div.className = "msg"; // this ensures that every box is styles
-            new_div.innerHTML = msg;
-            father.appendChild(new_div);
-            counter++;
+        function increment(msg) {
+            if(counter % 2 === 1) {
+                var new_div = document.createElement("div");
+                new_div.className = "msg"; // this ensures that every box is styles
+                new_div.innerHTML = (counter + 1) / 2 + ". " + msg;
+                father.appendChild(new_div);
+                counter++;
+            }
+            else { // add to the last log
+                var logs = hid0.getElementsByClassName("msg");
+                logs.item(logs.length - 1).innerHTML = logs.item(logs.length - 1).innerHTML + ", " + msg;
+                counter++;
+            }
         }
+        // increment.peek() { // fascinating, but unnecessary
+        //     return counter;
+        // }
+        return increment;
     }
     var fn0 = get_fn0(); // this is a function to add a msg to the created div (hid0)
     // now we add the stylesheet

@@ -14,7 +14,7 @@ reflect the semantics of the project. But I'm alone on this project. It may not 
 so I'm going to write a documentation, sort of, for the APP.
 
 
-The long way takes short steps, but the resulta are already there, so here I go.
+The long way takes short steps, but the results are already there, so here I go.
 
 
 P.S. I'll see that the next README's will be more formal, and on point. Wish me luck.

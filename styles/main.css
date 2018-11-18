@@ -20,8 +20,11 @@
     box-sizing: border-box;
 }
 body {
-    color: #554971;
-    background-color: #5bc0be;
+    color: #37898c;
+    background-color: #5d9cec;
+}
+.header, .search {
+    background-color: #ac92ec;
 }
 /* #main_container div {
     padding: 5px;
@@ -32,45 +35,76 @@ body {
 #main_container {
 
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 8fr auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
     "logo header search"
-    "sidebar content .";
+    "sidebar content hud";
     align-items: center;
 }
 /* . */
 .logo {
-    grid-area: logo; /* we name it, to be used with the main_container grid-template-areas */
+    grid-area: logo;
     justify-self: right;
     padding-right: 32px;
 }
 .logo img {
-
     height: 64;
     width: 64;
 }
 .header{
     grid-area: header;
     justify: center;
+    border-radius: 15px 0 0 0;
 }
 .header h1{
     text-align: center;
 }
 .search {
-    grid-area: search; /* we name it, to be used with the main_container grid-template-areas */
-    border-radius: 0 3px 0 3px;
-    padding: 0 40px 0 16px;
+    grid-area: search;
+    align-self: stretch;
+    /* . */
+    border-radius: 0 15px 0 0;
+    padding: 0 16px 0 16px;
 }
+div.search.centered {
+    display: inline-block; /* this and auto width makes for a tight box */
+}
+div.search.centered input {
+    width: 100px;
+}
+.centered { /*remember to try this for the logo, because it's the better way */
+    align-self: center;
+}
+/* #input_id {
+    align-self: center;
+} */
 .sidebar {
     grid-area: sidebar;
+    align-self: stretch; /* if i don't stretch, it remains in the middle, and depends upon the size of content */
+
     padding-right: 16px;
+    background-color: grey;
+    border-radius: 15px 0 0 0;
+
+}
+.sidebar div ul {
+    width: 140px;
+
+    vertical-align: top;
 }
 .content {
     grid-area: content;
     padding: 0 16px 0 16px;
     align-self: stretch;
     background-color: cyan;
+    /* . */
+    font-size: 12;
+}
+.hud {
+    grid: hud;
+    background-color: grey;
+    align-self: stretch;
 }
 /* . */
 #main_menu {
