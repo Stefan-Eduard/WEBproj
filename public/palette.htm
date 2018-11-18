@@ -1,0 +1,60 @@
+<html>
+
+</address>
+<head>
+    <title>coolors</title>
+</head>
+
+<body>
+    <script>
+        function palette(colors) {
+            document.body.appendChild(d = document.createElement("div"));
+            d.className = "palette";
+            for(i in colors)
+            {
+
+                var son = document.createElement("div");
+                son.style.backgroundColor = colors[i];
+                d.appendChild(son);
+                //
+                d.className.concat(colors[i]);
+            }
+        }
+        /*
+        0b"132b" 1c2541"" 3a506b"" 5bc0be"" 6fffe9"
+        "       ""     36"213e" 554971"" 63768d"" 8ac6d0"" b8f3ff"
+
+
+
+                    dcdcdd c5c3c6 46494c 4c5c681985a1
+        */
+        palette({
+            0: "#2b2d42", 1: "#8d99ae", 2: "#edf2f4", 3: "#ef233c", 4: "#d90429"
+        });
+        palette({
+            0: "#13293d", 1: "#006494", 2: "#247ba0", 3: "#1b98e0", 4: "#e8f1f2"
+        });
+
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .palette div {
+            align: center;
+            display: inline-block; /* important one */
+        }
+        .palette {
+            width: 20%;
+            height: 100px;
+            color: black;
+        }
+        .palette div {
+            width: 20%;
+            height: 75px;
+        }
+    </style>
+</body>
+
+</html>

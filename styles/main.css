@@ -1,0 +1,92 @@
+/*
+ * preamble, prerogatives, forewords
+ */
+
+ /* for chess:
+     #2b2d42 #8d99ae #edf2f4 #ef233c #d90429
+ for main page:
+
+     #0b132b #1c2541 #3a506b #5bc0be #6fffe9
+     #36213e #554971 #63768d #8ac6d0 #b8f3ff
+
+     #13293d #006494 #247ba0 #1b98e0 #e8f1f2
+
+     #dcdcdd #c5c3c6 #46494c #4c5c681985a1 #*/
+
+* {
+    font-family: Quicksand, Open Sans, sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    color: #554971;
+    background-color: #5bc0be;
+}
+/* #main_container div {
+    padding: 5px;
+    float: left;
+} */
+
+/* getting the layout working */
+#main_container {
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+    "logo header search"
+    "sidebar content .";
+    align-items: center;
+}
+/* . */
+.logo {
+    grid-area: logo; /* we name it, to be used with the main_container grid-template-areas */
+    justify-self: right;
+    padding-right: 32px;
+}
+.logo img {
+
+    height: 64;
+    width: 64;
+}
+.header{
+    grid-area: header;
+    justify: center;
+}
+.header h1{
+    text-align: center;
+}
+.search {
+    grid-area: search; /* we name it, to be used with the main_container grid-template-areas */
+    border-radius: 0 3px 0 3px;
+    padding: 0 40px 0 16px;
+}
+.sidebar {
+    grid-area: sidebar;
+    padding-right: 16px;
+}
+.content {
+    grid-area: content;
+    padding: 0 16px 0 16px;
+    align-self: stretch;
+    background-color: cyan;
+}
+/* . */
+#main_menu {
+    display: grid;
+    grid-template-columns: auto; /* equiv. to 100px 100px 100px 100px */
+}
+#main_menu a{
+    justify-self: center;
+    padding: 10px;
+    text-decoration: none;
+}
+#main_menu a{
+    justify-self: right;
+}
+
+
+#main_menu a:hover {
+    color: rgb(224, 146, 159);
+}
