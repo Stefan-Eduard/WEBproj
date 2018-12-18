@@ -13,8 +13,13 @@
 
      #dcdcdd #c5c3c6 #46494c #4c5c681985a1 #*/
 
+     ::-webkit-input-placeholder {
+       color: navy;
+     }
+
 * {
-    font-family: Quicksand, Open Sans, sans-serif;
+    font-family: roboto-slablight, roboto-slabregular, quicksandregular, sans-serif;
+    /* to get rid of: 'katarina_fontregular', finityregular */
 }
 * {
     box-sizing: border-box;
@@ -64,7 +69,8 @@ body {
     grid-area: search;
     align-self: stretch;
     /* . */
-    border-radius: 0 15px 0 0;
+    background-color: blueviolet;
+    border-radius: 0 15px 0 0; /* (****) */
     padding: 0 16px 0 16px;
 }
 div.search.centered {

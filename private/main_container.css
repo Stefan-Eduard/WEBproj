@@ -10,15 +10,14 @@
     align-items: center;
 }
 div#chess_container {
-    width: 320px;
+    width: auto;
     height: auto;
-    background: #edf2f4; /* #d90429 */
     border-radius: 3px;
 }
-div#chess_container div:nth-child(2n) { /*1 for the grid coloratoin */
-    background: rgb(239, 35, 60);; /* #d90429 */
+/* div#chess_container div:nth-child(2n) {
+    background: rgb(239, 35, 60);
     border-radius: 3px;
-}
+} */
 /* . */
 /* on modifications for the past grid: */
 .sidebar {
@@ -32,6 +31,8 @@ div#chess_container div:nth-child(2n) { /*1 for the grid coloratoin */
 }
 .chess_container {
     grid-area: chess_container;
+    align-self: stretch;
+    background-color: slategrey;
 }
 .hid2 { /*this should be renamed*/
     grid-area: hid2;

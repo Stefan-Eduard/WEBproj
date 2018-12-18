@@ -1,0 +1,8 @@
+* see that you have the hidden, added divs inside the chess_container, you could eliminate it, but remember this technique, if it comes in useful
+* watch out, when YOU WILL make the chess board expandable/responsive, that you should keep a few pixels between it and the square if "overshades". ;)
+* I am doing the previous one, so that I need to center the images(pieces) inside the divs
+  * I am also colouring the board using JS, so that I can, using a formula, color all of them accordingly and eliminate the hidden divs
+  * !!!  (*) let's use mathematics -- after eliminating the useless-to-be divs, I can use only math (we know the divs inside the main_container to just highlight any of them)
+  * can use regex to find them (rook)
+  * IMP -- to generalise the function for each piece, I should compute an array-like structure for the moves, make a general function to compute all the possible places
+  * IMP -- don't forget, you should also each and every time check how the king does, otherwise all is in vain

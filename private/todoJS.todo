@@ -1,0 +1,11 @@
+TODO
+
+☐ array with piece moves -- the keys are "rook", ... @timestamp(2018-11-23 16:12)
+    ☐ good for a pawn, not so much for anything else, so that I use another method for rooks, queen, bishop -- and
+☐ function for highlighting a set of zones @timestamp(2018-11-23 16:12)
+☐ general function for moving a piece @timestamp(2018-11-23 16:12)
+
+
+
+Added dependecies:
+    ☐ @line(351) @fn("pawn") a piece can only have the class of "rook0", "rook1" etc.

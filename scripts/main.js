@@ -10,3 +10,12 @@ window.addEventListener("load", function(){
     script.src = "../private/chess.js";
     document.head.appendChild(script);
 });
+function handle(event) {
+    self = document.getElementById("search");
+    if(self.value == 13) { // Enter
+        // what do you do now?
+    }
+    else { // here I could make something to show current hits
+        
+    }
+}

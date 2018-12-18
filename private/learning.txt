@@ -1,0 +1,3 @@
+nodeList
+unshift to tranform it to array
+Array.from() -- it works for nodeList
