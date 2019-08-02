@@ -1,0 +1,149 @@
+::-webkit-input-placeholder {
+    color: navy;
+}
+
+* {
+    font-family: Quicksand, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: white;
+    background-color: whitesmoke;
+}
+
+#header, #searchbar, #sidebar {
+    background-color: #666666;
+}
+/* #main_container div {
+    padding: 5px;
+    float: left;
+} */
+
+/* getting the layout working */
+#main_container {
+    display: grid;
+    grid-template-columns: 160px auto;
+    grid-template-rows: 120px auto;
+    grid-template-areas:
+    "logo header"
+    "sidebar content";
+    align-items: center;
+}
+/* . */
+#header h1{
+    width: 75%;
+    border-radius: 50px 0 0 0;
+}
+#logo {
+    grid-area: logo;
+    justify-self: right;
+    /* padding-left: 40px; */
+    padding-right: 30px;
+    padding-top: 14px;
+}
+#logo img {
+    height: 64;
+    width: 64;
+}
+#header{
+    grid-area: header;
+    /*  */
+    justify: center;
+    height: 120px;
+    border-radius: 40px 0 0 0;
+    position: relative;
+    /* */
+    /* display: flex;
+    flex-direction: row;
+    align-items: left; */
+}
+#header h1{
+    text-align: center;
+    display: inline-block;
+    float: left;
+    /*
+     */
+     padding-top: 20px;
+}
+/* CSS: For the searchbar */
+div#searchbar {
+    padding: 0;
+    /* padding-bottom: 10px; */
+}
+div#searchbar button {
+    height: 40px;
+    width: 20%;
+    display: -webkit-inline-box;
+    float: right;
+    margin-right: 10%;
+    /* extra */
+
+}
+div#searchbar input {
+    height: 40px;
+    width: 70%;
+    display: -webkit-inline-box;
+    /* float: right; */
+    border-radius: 15px 0 5px 0;
+}
+
+#searchbar {
+    display: inline-block;
+    /* position: absolute; */
+    /* up: 200; */
+    position: relative;
+    top: calc(-60px + 0px);/* -60 - the height of the searchbar*/
+    margin-left: 75%;
+    width: 25%;
+    grid-area: searchbar;
+    align-self: stretch;
+    /* . */
+    border-radius: 0 15px 0 0; /* (****) */
+    padding: 0 16px 0 16px;
+}
+/* #input_id {
+    align-self: center;
+} */
+#sidebar {
+    grid-area: sidebar;
+    align-self: stretch; /* if i don't stretch, it remains in the middle, and depends upon the size of content */
+    padding-right: 16px;
+    border-radius: 40px 0 0 0;
+    background-color: ;
+}
+#sidebar ul a{
+    margin-top: 15px;
+}
+#content {
+    grid-area: content;
+    padding: 0 16px 0 16px;
+    align-self: stretch;
+    color: whitesmoke;
+    background-color: #353535;
+    /* . */
+    font-size: 12;
+}
+/* . */
+#main_menu {
+    display: grid;
+    grid-template-columns: auto; /* equiv. to 100px 100px 100px 100px */
+}
+#main_menu a{
+    justify-self: center;
+    padding: 10px;
+    text-decoration: none;
+}
+#main_menu a{
+    justify-self: right;
+}
+#main_menu a:link {
+    /* color: #0099hh; */
+    color: rgb(99, 254, 248);
+}
+#main_menu a:hover {
+    color: whitesmoke;
+}

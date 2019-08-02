@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* can't bring the coloration here */
+
+div#main_container {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 160px 61.8% auto;
+    grid-template-rows: 120px auto auto;
+    /* grid-gap: 3px 3px; */
+    grid-template-areas:
+    "logo header header"
+    "sidebar chess_container ."
+    ". content content"
+    justify-self: center;
+}
+div#content {
+  grid-area: 3 / 2 / span 1 / span 2;
+}
+div#sidebar {
+  grid-area: 2 / 1 / span 2 / span 1;
+  border-radius: 40px 0 0 0;
+}
+div#header {
+  grid-area: 1 / 2 / span 1 / span 2;
+}
+
+/* now we change some stuff: */
+}
+div#searchbar input {
+    height: 40px;
+    width: 90%;
+    float: right;
+    display: -webkit-inline-box;
+}
+
+#chess_background {
+  grid-area: chess_container;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+}
+#chess_container {
+  grid-area: chess_container;
+  background-color: black;
+  margin: calc(0.382 * 19.1%) 19.1%;
+}
+#chess_container div {
+  height: 12.5%;
+}
+#chess_container .row div {
+  width: 12.5%;
+  height: 12.5%;
+  background-color: red;
+  border-radius: 10%;
+  display: inline-block;
+}
+#chess_container .row div div.null_div {
+  width: 0;
+  height: 0;
+}
+#chess_container .row div:nth-child(2n) {
+  background-color: white;
+}
+#chess_container .row div img.none {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+#chess_container .row div img.highlight{
+  -moz-box-shadow: inset 10px -5px 11px black;
+   -webkit-box-shadow: inset 10px -5px 11px black;
+   box-shadow: inset 10px -5px 11px black;
+}
+
+img{
+    transition:opacity 0.618s linear;
+}
+
+#chess_container .row div img {
+  width: 61.8%;
+  height: 61.8%;
+  margin: 19.1%;
+  border-radius: 10%;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 10px 6px -6px #777;
+}
+#chess_container .row div img:not:(.none) {
+  background-image: linear-gradient();
+}

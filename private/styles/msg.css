@@ -1,0 +1,36 @@
+.hid0 {
+    overflow-y: scroll;
+    background-color: grey;
+    height: 320px; /* to get it to actually scroll */
+    border-radius: 20px 0 0 0;
+}
+
+.msg{
+    font-family: quicksandregular;
+    background-color: white;
+    color: navy;
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+    margin: 7px 25px 0px 10px;
+
+}
+/* use the colours from the pieces to colr the scrollbar and the rest of the game interface. Period. */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: dimgrey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

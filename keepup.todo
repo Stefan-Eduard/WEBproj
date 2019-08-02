@@ -1,0 +1,13 @@
+Note down all the CSS that has to be modified when pressing the button:
+* could modify the positioning of the input
+* create a github project to make a project board
+* reorganize the grid\
+    - turn the chess into components - each position a div, each containing an image
+    - make them inline rather than positioning them into a grid-view
+* get through the 300 lines of JS, see what I can recap, then delete it all
+    - and start anew, with better code
+* make all the private styles mobile first, as not to snowball-effect multiple files modifications
+
+
+
+* JS button to center on the game :D

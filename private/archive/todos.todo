@@ -1,0 +1,51 @@
+tasks (PACKAGE) hotkeys:
+Special formatting for .todo and .taskpaper files. Allows you to easily add, complete, and archive your tasks.
+
+Adjust the settings to match your ideal style. Change all the markers to '-' to match taskpaper.
+
+Any line that ends with : will be considered a header (like My Things:)
+
+Add tags to tasks by starting them with an @, such as @important or setting a value like @due(tuesday).
+
+This uses utf characters, so it is still valid as a plain text document.
+
+You can also set a custom date/time format in the settings. These can be converted in an existing document using the Tasks: Update Timestamp Format.
+@important
+
+☐ @important @timestamp(2018-11-23 15:11)
+so, this template engine also colours every line ending in:
+☐ @due(tuesday) @timestamp(2018-11-23 15:11)
+
+
+
+☐ @hotkeys
+ctrl-enter: add a new todo item below the current
+ctrl-shift-enter: add a new todo item above the current
+ctrl-d: toggle completion of the task
+ctrl-shift-a: move all completed tasks to the archive section
+alt-c: cancel the selected tasks
+ctrl-shift-s: add/update timestamp for current task:
+
+TODO df
+TODO ds
+* see that you have the hidden, added divs inside the chess_container, you could eliminate it, but remember this technique, if it comes in useful
+* watch out, when YOU WILL make the chess board expandable/responsive, that you should keep a few pixels between it and the square if "overshades". ;)
+* I am doing the previous one, so that I need to center the images(pieces) inside the divs
+  * I am also colouring the board using JS, so that I can, using a formula, color all of them accordingly and eliminate the hidden divs
+  * !!!  (*) let's use mathematics -- after eliminating the useless-to-be divs, I can use only math (we know the divs inside the main_container to just highlight any of them)
+  * can use regex to find them (rook)
+  * IMP -- to generalise the function for each piece, I should compute an array-like structure for the moves, make a general function to compute all the possible places
+  * IMP -- don't forget, you should also each and every time check how the king does, otherwise all is in vain
+  ☐ icon editor (be it in atom or outside of it)
+  ✘ d @cancelled(2018-11-21 15:29)
+  ✘ new task @cancelled(2018-11-21 15:31)
+  ☐ add a previous div before searchbar, so that you can get the effect of a notebook
+  ☐ find more tasks
+    ☐ shape your CSS files
+      ☐ check grid for one last time -- and finish with any naming
+      ☐ check classes and id
+      ☐ recheck how you name your classes
+      ☐ recheck the arborescent layout of your files
+      ☐
+      ☐
+      ☐ make a choice -- what do you style in JS, what do you style in CSS
