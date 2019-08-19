@@ -145,31 +145,71 @@ function init() {
 
   window.scrollTo(0, 120) // ----> scroll to the beginnign of the game
 
+  // check if a given position is out of board ----> it doesn't respect the a-h, 1-8 notations :D
+  function outOfBoard(position) {
+    charPart = String.fromCharCode(position.charCodeAt(0))
+    intPart = parseInt(position.charAt(1))
+    if (alpha.includes(charPart) && intPart > 0 && intPart < 9)
+      return false
+    else
+      return true
+  }
+
+  // check if a given position is occupied
+  function isOccupied(position) {
+    let div = document.getElementById(position)
+    if (div.firstChild.className === 'none') {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  // console.log(isOccupied('g1'))
+  // console.log(isOccupied('g2'))
+  // console.log(isOccupied('g3'))
+
+  // check if a given position contains a piece, and if it does, it returns the number of the player (0 or 1)
+  //   otherwise it returns -1
+  function whichPlayer(position) {
+    let div = document.getElementById(position)
+    if (div.firstChild.src.contains('0.png')) {
+      return 0
+    } else if (div.firstChild.src.contains('1.png')){
+      return 1
+    } else {
+      return -1
+    }
+  }
+
+  // a function to generate the position, depending on the offsets
   function moveXY(position, charOffset, intOffset) {
     newChar = String.fromCharCode(position.charCodeAt(0) + charOffset)
     newInt = parseInt(position.charAt(1)) + intOffset
-    if (alpha.includes(newChar) && newInt > 0 && newInt < 9)
-      return newChar + newInt
+    newPosition = newChar + newInt
+    if (!outOfBoard(newPosition))
+      return newPosition
     else
       return 'outOfBoard'
   }
 
-
-
+  // a function to generate all the possible moves for a piece, at a given time
+  // TODO  pay attention that we'll need a variable for the 'check' state :D
   function moves(position) { // a position like 'a3', 'e3'
-    let player0 = (document.getElementById(position).firstChild.src.includes('0.png'))
-    let player1 = (!player0)
+    let player0 = (whichPlayer(position) === '0')
+    let player1 = (whichPlayer(position) === '1')
     className = document.getElementById(position).firstChild.classList[0]
     console.log(className)
+    let nextMoves = []
+    let filteredMoves = []
     switch (className) {
       case 'pawn':
-        nextMoves = []
         if (player0) {
           nextMoves.push(moveXY(position, 0, 1))
           // nextMoves.push(moveXY(position, 1, 1), moveXY(position, -1, 1))
           if (position.charAt(1) == '2')
             nextMoves.push(moveXY(position, 0, 2))
-        } else {
+        } else if (player1){
           nextMoves.push(moveXY(position, 0, -1))
           // nextMoves.push(moveXY(position, 1, -1), moveXY(position, -1, -1))
           if (position.charAt(1) == '7')
@@ -181,7 +221,69 @@ function init() {
         console.log(filteredMoves)
         break;
       case 'rook':
-
+        plusX = true
+        plusY = true
+        minusX = true
+        minusY = true
+        for (let i = 1; i < 8; i++) {
+          // first check the conditions
+          if (outOfBoard(moveXY(position, i, 0)) || isOccupied(moveXY(position, i, 0))) {
+            // we can also attack the first piece partaining to the other player
+            if (isOccupied(moveXY(position, i, 0))) {
+              thisPlayer = whichPlayer(position)
+              thatPlayer = thatPlayer(moveXY(position, i, 0))
+              if (thisPlayer + thatPlayer == 1) {
+                nextMoves.push(moveXY(position, i, 0))
+              }
+            }
+            plusX = false
+          }
+          if (outOfBoard(moveXY(position, 0, i)) || isOccupied(moveXY(position, 0, i))) {
+            // we can also attack the first piece partaining to the other player
+            if (isOccupied(moveXY(position, 0, i))) {
+              thisPlayer = whichPlayer(position)
+              thatPlayer = thatPlayer(moveXY(position, 0, i))
+              if (thisPlayer + thatPlayer == 1) {
+                nextMoves.push(moveXY(position, 0, i))
+              }
+            }
+            plusY = false
+          }
+          if (outOfBoard(moveXY(position, -i, 0)) || isOccupied(moveXY(position, -i, 0))) {
+            // we can also attack the first piece partaining to the other player
+            if (isOccupied(moveXY(position, -i, 0))) {
+            thisPlayer = whichPlayer(position)
+            thatPlayer = thatPlayer(moveXY(position, -i, 0))
+            if (thisPlayer + thatPlayer == 1) {
+              nextMoves.push(moveXY(position, -i, 0))
+            }
+            minusX = false
+          }
+          if (outOfBoard(moveXY(position, 0, -i)) || isOccupied(moveXY(position, 0, -i))) {
+            // we can also attack the first piece partaining to the other player
+            if (isOccupied(moveXY(position, 0, -i))) {
+            thisPlayer = whichPlayer(position)
+            thatPlayer = thatPlayer(moveXY(position, 0, -i))
+            if (thisPlayer + thatPlayer == 1) {
+              nextMoves.push(moveXY(position, 0, -i))
+            }
+            minusY = false
+          }
+          // then for all the true conditions, add the positions :D
+          if (plusX) {
+            nextMoves.push(moveXY(position, i, 0))
+          }
+          if (plusY) {
+            nextMoves.push(moveXY(position, i, 0))
+          }
+          if (minusX) {
+            nextMoves.push(moveXY(position, 0, -i))
+          }
+          if (minusY) {
+            nextMoves.push(moveXY(position, 0, -i))
+          }
+        }
+        filteredMoves = nextMoves
         break;
       case 'knight':
 
@@ -198,12 +300,17 @@ function init() {
       default:
 
     }
+    return filteredMoves
   }
 
   moves('a2')
   moves('b2')
   moves('a7')
   moves('b7')
+  moves('a1')
+  moves('h1')
+  moves('a8')
+  moves('h8')
 
   function highlight(event) {
     if (!event.target.classList.contains('none')) {
