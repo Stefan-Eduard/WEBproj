@@ -209,7 +209,7 @@ function init() {
           // nextMoves.push(moveXY(position, 1, 1), moveXY(position, -1, 1))
           if (position.charAt(1) == '2')
             nextMoves.push(moveXY(position, 0, 2))
-        } else if (player1){
+        } else if (player1) {
           nextMoves.push(moveXY(position, 0, -1))
           // nextMoves.push(moveXY(position, 1, -1), moveXY(position, -1, -1))
           if (position.charAt(1) == '7')
@@ -286,16 +286,16 @@ function init() {
         filteredMoves = nextMoves
         break;
       case 'knight':
-
+        // eight possible moves, just test them if are either free or occupied, we will just filter them :D
         break;
       case 'bishop':
-
+        // will be similar to rook ----> they actually could both be solved with different (literal) for a common function
         break;
       case 'queen':
-
+        // the same as the bishop, and as the rook
         break;
       case 'king':
-
+        // easier than the rest, just a square move, but we need to check the the position is 'safe' ----> function for this
         break;
       default:
 
