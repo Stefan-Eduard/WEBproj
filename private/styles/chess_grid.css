@@ -14,7 +14,7 @@ div#main_container {
     /* grid-gap: 3px 3px; */
     grid-template-areas:
     "logo header header"
-    "sidebar chess_container ."
+    "sidebar chess_container hid_container"
     ". content content"
     justify-self: center;
 }
@@ -76,6 +76,16 @@ div#searchbar input {
   -moz-box-shadow: inset 10px -5px 11px black;
    -webkit-box-shadow: inset 10px -5px 11px black;
    box-shadow: inset 10px -5px 11px black;
+}
+#chess_container .row div img.highlight-capture{
+  -moz-box-shadow: inset 10px -5px 11px black;
+   -webkit-box-shadow: inset 10px -5px 11px black;
+   box-shadow: inset 10px -5px 11px black;
+}
+#chess_container .row div img.highlight-open{
+  -moz-box-shadow:  10px -5px 11px black;
+   -webkit-box-shadow:  10px -5px 11px black;
+   box-shadow:  10px -5px 11px black;
 }
 
 img{

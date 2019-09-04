@@ -1,5 +1,47 @@
-.hid2 {
-    height: 320px; /* to get it to actually scroll */
-    border-radius: 0 0 0 0;
+#hid_container {
+    width: 100%;
+    height: 100%;
+    /* grid-area: hid_container; */
+    background-color: black;
+}
+
+#msg_box {
+    width: 80%;
+    height: 80.9%;
+    margin-top: 19.1%;
+    margin-right: 20%;
+    /*  */
     background-color: grey;
+    /*  */
+    border-radius: 0 4px 4px 0;
+    overflow-y: scroll;
+}
+
+.msg {
+    font-size: 20px;
+    background-color: white;
+    color: navy;
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+    margin: 7px 25px 10px 10px;
+}
+/* use the colours from the pieces to colr the scrollbar and the rest of the game interface. Period. */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: red;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
