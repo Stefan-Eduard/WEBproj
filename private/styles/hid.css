@@ -27,21 +27,21 @@
 }
 /* use the colours from the pieces to colr the scrollbar and the rest of the game interface. Period. */
 /* width */
-::-webkit-scrollbar {
+#msg_box::-webkit-scrollbar {
     width: 10px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+#msg_box::-webkit-scrollbar-track {
     background: #ffffff;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+#msg_box::-webkit-scrollbar-thumb {
     background: red;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+#msg_box::-webkit-scrollbar-thumb:hover {
     background: #555;
 }

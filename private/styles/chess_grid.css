@@ -72,17 +72,17 @@ div#searchbar input {
   box-shadow: none;
 }
 
-#chess_container .row div img.highlight{
+#chess_container .row div img.highlight {
   -moz-box-shadow: inset 10px -5px 11px black;
    -webkit-box-shadow: inset 10px -5px 11px black;
    box-shadow: inset 10px -5px 11px black;
 }
-#chess_container .row div img.highlight-capture{
+#chess_container .row div img.highlight-capture {
   -moz-box-shadow: inset 10px -5px 11px black;
    -webkit-box-shadow: inset 10px -5px 11px black;
    box-shadow: inset 10px -5px 11px black;
 }
-#chess_container .row div img.highlight-open{
+#chess_container .row div img.highlight-open {
   -moz-box-shadow:  10px -5px 11px black;
    -webkit-box-shadow:  10px -5px 11px black;
    box-shadow:  10px -5px 11px black;
