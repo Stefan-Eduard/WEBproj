@@ -5,6 +5,7 @@
 // STEPS
 // document.getElementById('chess_btn').click()
 
+var capturedPieces = []
 
 function link_stylesheet(href) {
     var link = document.createElement("link");
@@ -108,6 +109,7 @@ function init() {
     link.rel = "stylesheet";
     // document.getElementsByClassName("hid0").item(0).innerHTML = "hid0";
     // document.getElementsByClassName("hid2").item(0).innerHTML = "hid2";
+    // TODO  important, and essential changef
     link.href = "../private/styles/main_container.css";
     document.head.appendChild(link);
     document.getElementById("chess_btn").style.display = "none";
@@ -233,18 +235,33 @@ function init() {
         let filteredMoves = []
         switch (className) {
             case 'pawn':
+                // moving and capturing moves :)) :
                 if (player0) {
                     nextMoves.push(moveXY(position, 0, 1))
                     // nextMoves.push(moveXY(position, 1, 1), moveXY(position, -1, 1))
                     if (position.charAt(1) === '2')
                         nextMoves.push(moveXY(position, 0, 2))
+                    // capturing:
+                    if (!outOfBoard(moveXY(position, -1, 1)) &&
+                        whichPlayer(moveXY(position, -1, 1)) == '1')
+                        nextMoves.push(moveXY(position, -1, 1))
+                    if (!outOfBoard(moveXY(position, +1, 1)) &&
+                        whichPlayer(moveXY(position, +1, 1)) == '1')
+                        nextMoves.push(moveXY(position, +1, 1))
                 } else if (player1) {
                     nextMoves.push(moveXY(position, 0, -1))
                     // nextMoves.push(moveXY(position, 1, -1), moveXY(position, -1, -1))
                     if (position.charAt(1) === '7')
                         nextMoves.push(moveXY(position, 0, -2))
+                    // capturing:
+                    if (!outOfBoard(moveXY(position, -1, -1)) &&
+                        whichPlayer(moveXY(position, -1, -1)) == '0')
+                        nextMoves.push(moveXY(position, -1, -1))
+                    if (!outOfBoard(moveXY(position, +1, -1)) &&
+                        whichPlayer(moveXY(position, +1, -1)) == '0')
+                        nextMoves.push(moveXY(position, +1, -1))
                 }
-                // console.log(nextMoves)
+                // keep the ones inside the board
                 filteredMoves = nextMoves.filter((x) => {
                     return x != 'outOfBoard'
                 })
@@ -358,16 +375,35 @@ function init() {
 
             // first we check if we need to highlight (ii.), or we just need to capture/change position of already highlighted piece(i.)
             // if we selected a piece (possible (i.))
-            if (document.querySelector('#chess_container .row div img.highlight') != null) {
+            let highlightDiv = document.querySelector('#chess_container .row div img.highlight')
+            if (highlightDiv != null) {
+                highlightDiv = highlightDiv.parentNode
                 console.log(event.target)
                 if (event.target.classList.contains('highlight-open')) { // we move the piece
-                    // TODO  here we just move the piece, by unrooting this one and the other one
+                    // here we just move the piece, by unrooting this one and the other one
+                    let gotoDiv = event.target.parentNode
+                    //
+                    let aux = gotoDiv.removeChild(gotoDiv.childNodes[0])
+                    gotoDiv.appendChild(highlightDiv.removeChild(highlightDiv.childNodes[0]))
+                    highlightDiv.appendChild(aux)
                     // so we swap this img with the img of the highlight'ed piece :D
                 } else if (event.target.classList.contains('highlight-capture')) { // we capture a piece
-                    // TODO
-                    // TODO  remember that we need to clone an 'empty position' to be able to capture
+                    // here we also capture a piece, and store it for later
+                    let gotoDiv = event.target.parentNode
+                    //
+                    console.log('capturing')
+                    let nonePosition = document.querySelector('#chess_container .row div img.none:not(.highlight-open)')
+                    console.log(nonePosition)
+                    console.log(nonePosition.cloneNode(false))
+                    let noneClone = nonePosition.cloneNode(true)
+                    // we store the captured piece
+                    capturedPieces.push(gotoDiv.removeChild(gotoDiv.childNodes[0]))
+                    //
+                    gotoDiv.appendChild(highlightDiv.removeChild(highlightDiv.childNodes[0]))
+                    highlightDiv.appendChild(noneClone)
                 }
-            }
+                // no matter what, we should also clean the board of hig
+            } else
             // if (event.target.classList.contains('none')
             //     || event.target.classList.length > 1) // empty or highlighted :D
             if (!event.target.classList.contains('none')) {
