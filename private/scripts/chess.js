@@ -355,40 +355,80 @@ function init() {
         console.log(moves('h8'))
 
         function highlight(event) {
-            // TODO  solve the problem of eliminating every single type of highlighting
+
+            // first we check if we need to highlight (ii.), or we just need to capture/change position of already highlighted piece(i.)
+            // if we selected a piece (possible (i.))
+            if (document.querySelector('#chess_container .row div img.highlight') != null) {
+                console.log(event.target)
+                if (event.target.classList.contains('highlight-open')) { // we move the piece
+                    // TODO  here we just move the piece, by unrooting this one and the other one
+                    // so we swap this img with the img of the highlight'ed piece :D
+                } else if (event.target.classList.contains('highlight-capture')) { // we capture a piece
+                    // TODO
+                    // TODO  remember that we need to clone an 'empty position' to be able to capture
+                }
+            }
+            // if (event.target.classList.contains('none')
+            //     || event.target.classList.length > 1) // empty or highlighted :D
             if (!event.target.classList.contains('none')) {
+                // first we remove all highlight's:
+                let highlightedOpen = document.querySelectorAll('#chess_container .row div img.highlight-open')
+                for (elem of highlightedOpen) {
+                    elem.classList.remove('highlight-open')
+                }
+                let highlightedCapture = document.querySelectorAll('#chess_container .row div img.highlight-capture')
+                for (elem of highlightedCapture) {
+                    elem.classList.remove('highlight-capture')
+                }
                 if (event.target.classList.contains('highlight')) {
+                    // 'un-highlight' the element
                     event.target.classList.remove('highlight')
+
                 } else {
                     let highlighted_elements = document.querySelectorAll('#chess_container .row div img.highlight')
                     highlighted_elements.forEach((elem) => {
                         elem.classList.remove('highlight')
                     })
                     event.target.classList.toggle('highlight')
-                    // we generate the possible positions:
+                    // (0.) we generate the possible positions:
                     console.log(event.target.parentNode)
                     let positions = moves(event.target.parentNode.id)
                     console.log(positions)
-                    // we iterate throught these moves and depending on them being or not occupied,
+                    // (1.) we iterate throught these positions and depending on them being or not occupied,
                     // we highlight them in two different ways
                     for (position of positions) {
-                        let img = document.getElementById(position).firstChild
+                        let div = document.getElementById(position)
+                        let img = div.firstChild
                         // img.classList.toggle('highlight-capture')
-                        img.classList.toggle('highlight-open')
+                        if (img.classList.contains('none')) {
+                            img.classList.toggle('highlight-open')
+                        } else {
+                            img.classList.toggle('highlight-capture')
+                        }
                     }
-                    // console.log(moves('a2'))
-                    // TODO  highlight, with or without cloning the image (we can keep clones from the beginning :D)
-                    //        the possible positions
+                    // (2.)
                     // TODO  function (I) sets the class 'free' to all those position, so that adding an eventListener for these elements, that works on click only if they have the right class, will do the stuff :DDDD
                     //        take into account that the other handlers should clean the 'highlight's and 'free'
                     // pay attention, the other handler should be added to all other positions, even the free ones.
                     // there are the classes that tell the handler how to act :D
                 }
-
+            } else { // we have not a piece as the event.target
+                let highlightedElem = document.querySelector('#chess_container .row div img.highlight')
+                if (highlightedElem != null) {
+                    highlightedElem.classList.remove('highlight')
+                }
+                let highlightedOpen = document.querySelectorAll('#chess_container .row div img.highlight-open')
+                for (elem of highlightedOpen) {
+                    elem.classList.remove('highlight-open')
+                }
+                let highlightedCapture = document.querySelectorAll('#chess_container .row div img.highlight-capture')
+                for (elem of highlightedCapture) {
+                    elem.classList.remove('highlight-capture')
+                }
             }
         }
 
-        let img_tags = document.querySelectorAll('img:not(.none)');
+        let img_tags = document.querySelectorAll('img');
         for (img of img_tags) {
             img.addEventListener('click', highlight)
         }
