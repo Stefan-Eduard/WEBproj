@@ -6,6 +6,7 @@
 // document.getElementById('chess_btn').click()
 
 var capturedPieces = []
+var currentPlayerTurn= '0'
 
 function link_stylesheet(href) {
     var link = document.createElement("link");
@@ -387,8 +388,16 @@ function init() {
         console.log(moves('a8'))
         console.log(moves('h8'))
 
-        function highlight(event) {
+        function addMsg(fromId, toId) {
+            let msgDiv = document.getElementById('msg_box')
+            let newMsg = document.createElement('div')
+            newMsg.className = 'msg'
+            newMsg.innerHTML = `P${currentPlayerTurn}: ${fromId} -> ${toId}`
+            msgDiv.appendChild(newMsg)
+        }
 
+        function highlight(event) {
+            //  we don't need to check if there are highlighted pieces to make a move, because that's presumed by the code)
             // first we check if we need to highlight (ii.), or we just need to capture/change position of already highlighted piece(i.)
             // if we selected a piece (possible (i.))
             let highlightDiv = document.querySelector('#chess_container .row div img.highlight')
@@ -396,16 +405,32 @@ function init() {
                 highlightDiv = highlightDiv.parentNode
                 console.log(event.target)
                 if (event.target.classList.contains('highlight-open')) { // we move the piece
-                    // here we just move the piece, by unrooting this one and the other one
                     let gotoDiv = event.target.parentNode
+                    // we add the msg:
+                    addMsg(highlightDiv.id, gotoDiv.id)
+                    // we change the player turn
+                    if (currentPlayerTurn == '1') {
+                        currentPlayerTurn = '0'
+                    } else {
+                        currentPlayerTurn = '1'
+                    }
+                    // here we just move the piece, by unrooting this one and the other one
                     //
                     let aux = gotoDiv.removeChild(gotoDiv.childNodes[0])
                     gotoDiv.appendChild(highlightDiv.removeChild(highlightDiv.childNodes[0]))
                     highlightDiv.appendChild(aux)
                     // so we swap this img with the img of the highlight'ed piece :D
                 } else if (event.target.classList.contains('highlight-capture')) { // we capture a piece
-                    // here we also capture a piece, and store it for later
                     let gotoDiv = event.target.parentNode
+                    // we add the msg:
+                    addMsg(highlightDiv.id, gotoDiv.id)
+                    // we change the player turn
+                    if (currentPlayerTurn == '1') {
+                        currentPlayerTurn = '0'
+                    } else {
+                        currentPlayerTurn = '1'
+                    }
+                    // here we also capture a piece, and store it for later
                     //
                     console.log('capturing')
                     let nonePosition = document.querySelector('#chess_container .row div img.none:not(.highlight-open)')
@@ -433,8 +458,7 @@ function init() {
                 if (highlightedElem != null) {
                     highlightedElem.classList.remove('highlight')
                 }
-            } else
-            if (!event.target.classList.contains('none')) {
+            } else if (!event.target.classList.contains('none')) {
                 // first we remove all highlight's:
                 let highlightedOpen = document.querySelectorAll('#chess_container .row div img.highlight-open')
                 for (elem of highlightedOpen) {
@@ -452,28 +476,33 @@ function init() {
                     highlighted_elements.forEach((elem) => {
                         elem.classList.remove('highlight')
                     })
-                    event.target.classList.toggle('highlight')
-                    // (0.) we generate the possible positions:
-                    console.log(event.target.parentNode)
-                    let positions = moves(event.target.parentNode.id)
-                    console.log(positions)
-                    // (1.) we iterate throught these positions and depending on them being or not occupied,
-                    // we highlight them in two different ways
-                    for (position of positions) {
-                        let div = document.getElementById(position)
-                        let img = div.firstChild
-                        // img.classList.toggle('highlight-capture')
-                        if (img.classList.contains('none')) {
-                            img.classList.toggle('highlight-open')
-                        } else {
-                            img.classList.toggle('highlight-capture')
+
+                    // here we enter into moving phase, that starts with highlighting:
+                    // FIRST, we check if it's the piece of the right player
+                    if (event.target.src.includes(`${currentPlayerTurn}.png`)) {
+                        event.target.classList.toggle('highlight')
+                        // then we can highlight
+                        // (0.) we generate the possible positions:
+                        console.log(event.target.parentNode)
+                        let positions = moves(event.target.parentNode.id)
+                        console.log(positions)
+                        // (1.) we iterate throught these positions and depending on them being or not occupied,
+                        for (position of positions) {
+                            let div = document.getElementById(position)
+                            let img = div.firstChild
+                            // we highlight them in two different ways
+                            if (img.classList.contains('none')) {
+                                img.classList.toggle('highlight-open')
+                            } else {
+                                img.classList.toggle('highlight-capture')
+                            }
                         }
+                        // (2.)
+                        // TODO  function (I) sets the class 'free' to all those position, so that adding an eventListener for these elements, that works on click only if they have the right class, will do the stuff :DDDD
+                        //        take into account that the other handlers should clean the 'highlight's and 'free'
+                        // pay attention, the other handler should be added to all other positions, even the free ones.
+                        // there are the classes that tell the handler how to act :D
                     }
-                    // (2.)
-                    // TODO  function (I) sets the class 'free' to all those position, so that adding an eventListener for these elements, that works on click only if they have the right class, will do the stuff :DDDD
-                    //        take into account that the other handlers should clean the 'highlight's and 'free'
-                    // pay attention, the other handler should be added to all other positions, even the free ones.
-                    // there are the classes that tell the handler how to act :D
                 }
             } else { // we have not a piece as the event.target
                 let highlightedElem = document.querySelector('#chess_container .row div img.highlight')
