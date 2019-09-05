@@ -237,10 +237,18 @@ function init() {
             case 'pawn':
                 // moving and capturing moves :)) :
                 if (player0) {
-                    nextMoves.push(moveXY(position, 0, 1))
-                    // nextMoves.push(moveXY(position, 1, 1), moveXY(position, -1, 1))
-                    if (position.charAt(1) === '2')
-                        nextMoves.push(moveXY(position, 0, 2))
+                    let forward = moveXY(position, 0, 1)
+                    if (forward == 'outOfBoard') {
+                        // TODO  special case, getting a bishop
+                    } else if (!isOccupied(forward)) {
+                        nextMoves.push(forward)
+                        if (position.charAt(1) === '2') {
+                            let forward2 = moveXY(position, 0, 2)
+                            if (forward2 != 'outOfBoard' && !isOccupied(forward2)) {
+                                nextMoves.push(forward2)
+                            }
+                        }
+                    }
                     // capturing:
                     if (!outOfBoard(moveXY(position, -1, 1)) &&
                         whichPlayer(moveXY(position, -1, 1)) == '1')
@@ -249,10 +257,18 @@ function init() {
                         whichPlayer(moveXY(position, +1, 1)) == '1')
                         nextMoves.push(moveXY(position, +1, 1))
                 } else if (player1) {
-                    nextMoves.push(moveXY(position, 0, -1))
-                    // nextMoves.push(moveXY(position, 1, -1), moveXY(position, -1, -1))
-                    if (position.charAt(1) === '7')
-                        nextMoves.push(moveXY(position, 0, -2))
+                    let forward = moveXY(position, 0, -1)
+                    if (forward == 'outOfBoard') {
+                        // TODO  special case, getting a bishop
+                    } else if (!isOccupied(forward)) {
+                        nextMoves.push(forward)
+                        if (position.charAt(1) === '7') {
+                            let forward2 = moveXY(position, 0, -2)
+                            if (forward2 != 'outOfBoard' && !isOccupied(forward2)) {
+                                nextMoves.push(forward2)
+                            }
+                        }
+                    }
                     // capturing:
                     if (!outOfBoard(moveXY(position, -1, -1)) &&
                         whichPlayer(moveXY(position, -1, -1)) == '0')
@@ -402,10 +418,22 @@ function init() {
                     gotoDiv.appendChild(highlightDiv.removeChild(highlightDiv.childNodes[0]))
                     highlightDiv.appendChild(noneClone)
                 }
-                // no matter what, we should also clean the board of hig
+                // no matter what, we should also clean the board of highlights :D
+                // first we remove all highlight's:
+                let highlightedOpen = document.querySelectorAll('#chess_container .row div img.highlight-open')
+                for (elem of highlightedOpen) {
+                    elem.classList.remove('highlight-open')
+                }
+                let highlightedCapture = document.querySelectorAll('#chess_container .row div img.highlight-capture')
+                for (elem of highlightedCapture) {
+                    elem.classList.remove('highlight-capture')
+                }
+                // then we remove the highlight for the moved piece:
+                let highlightedElem = document.querySelector('#chess_container .row div img.highlight')
+                if (highlightedElem != null) {
+                    highlightedElem.classList.remove('highlight')
+                }
             } else
-            // if (event.target.classList.contains('none')
-            //     || event.target.classList.length > 1) // empty or highlighted :D
             if (!event.target.classList.contains('none')) {
                 // first we remove all highlight's:
                 let highlightedOpen = document.querySelectorAll('#chess_container .row div img.highlight-open')
@@ -419,7 +447,6 @@ function init() {
                 if (event.target.classList.contains('highlight')) {
                     // 'un-highlight' the element
                     event.target.classList.remove('highlight')
-
                 } else {
                     let highlighted_elements = document.querySelectorAll('#chess_container .row div img.highlight')
                     highlighted_elements.forEach((elem) => {
